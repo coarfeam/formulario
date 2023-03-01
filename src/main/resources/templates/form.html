@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+    <h1 th:text="${titulo}"></h1>
+    <form th:action="@{/form}" th:object="${usuario}" method="post">
+        <label for="pais.id">País</label>
+        <select id="pais.id" th:field="*{pais.id}">
+            <option value="">--selecionar--</option>
+            <!-- <option th:each="pais: ${paises}" th:text="${pais}" th:value="${pais}"></option> -->
+            <option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('pais.id')}" th:errors="*{pais.id}"></span>
+        <!-- <span th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></span> -->
+        <label for="username">username</label>
+        <!-- <input type="text" name="username" id="username"> -->
+        <input type="text" id="username" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        <label for="password">password</label>
+        <input type="text" id="password" th:field="*{password}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <label for="email">email</label>
+        <input type="text" id="email" th:field="*{email}">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <input type="date" id="email" th:field="*{fechaNacimiento}">
+        <span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></span>
+        <button type="submit">enviar</button>
+    </form>
+</body>
+</html>
